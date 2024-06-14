@@ -30,27 +30,70 @@
               </el-button>
 
 
-              <el-form label-position="top" label-width="50px">
+              <el-form label-width="50px">
                 <el-row :gutter="0">
-
-                  <el-col :span="9" style="background-color: red;">
+                  <el-col :span="9" style="background-color: red; height: 220px">
                     <span>二维码</span>
                   </el-col>
 
-                  <el-col :span="15" style="background-color: aqua;">
-                    2
+
+                  <el-col :span="15" class="centered-content">
+
+                    <div>
+
+                      <div class="login-tab-wp" style="justify-content: center;display: flex;">
+                        <div
+                            class="login-tab-item"
+                            :class="{ 'active-tab': currentTab === 'password' }"
+                            @click="currentTab = 'password'" style="font-size: 16px">
+                          密码登录
+                        </div>
+                        <span style="color: #ccc;font-size: 16px">&#160&#160|&#160&#160</span>
+                        <div
+                            class="login-tab-item"
+                            :class="{ 'active-tab': currentTab === 'sms' }"
+                            @click="currentTab = 'sms'" style="font-size: 16px;:active">
+                          短信登录
+                        </div>
+                      </div>
+
+
+                      <div v-if="currentTab === 'password'">
+                        <!-- 密码登录表单 -->
+                          <div style="border: 1px solid #409EFF; border-radius: 10px 10px 0 0;height: 38px;width: 380px;margin-top: 20px;margin-left: 30px">
+                            <el-form-item label="账号">
+                              <input placeholder="请输入账号" style="border: none;outline: none">
+                            </el-form-item>
+                          </div>
+                        <div style="border: 1px solid #409EFF;border-top: transparent; border-radius: 0 0 10px 10px;height: 38px;width: 380px;margin-left: 30px">
+                          <el-form-item label="密码">
+                            <input type="password" placeholder="请输入密码" style="border: none;outline: none">
+                          </el-form-item>
+                        </div>
+                      </div>
+
+                      <div v-if="currentTab === 'sms'">
+                        <!-- 注册账号表单 -->
+                        <el-card style="width: 380px;margin-top: 20px;margin-left: 30px">
+
+                        </el-card>
+                      </div>
+
+                    </div>
+
                   </el-col>
+
+
+
 
 
 
 
                 </el-row>
                 <el-row :gutter="0">
-                  <el-col :span="24" style="background-color: darkblue;
-                  ">
+                  <el-col :span="24" style="background-color: darkblue; height: 100px;">
 
 
-                    3
 
                   </el-col>
                 </el-row>
@@ -82,6 +125,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      currentTab: 'password',
     }
   },
   methods: {
@@ -106,6 +150,20 @@ export default {
     height: 35px;
     margin-top: 20px;
   }
+}
+
+.centered-content {
+  //background-color: aqua;
+}
+
+.active-tab {
+  color: #409EFF; /* 选中时的颜色，Element UI主题蓝 */
+}
+
+.borderless-el-input .el-input__inner {
+  border: none !important; /* 强制去除边框 */
+  box-shadow: none !important; /* 去除阴影，如果有的话 */
+  outline: none !important; /* 在获得焦点时去除轮廓 */
 }
 
 </style>
