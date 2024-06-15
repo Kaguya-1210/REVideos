@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "axios": "^1.7.2",
     "element-plus": "^2.7.5",
+    "qs": "^6.12.1",
     "store": "^2.0.12",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
