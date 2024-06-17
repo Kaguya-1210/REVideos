@@ -12,6 +12,8 @@ public class UserVo {
     private Long id;
     @Schema(description = "用户名")
     private String username;
+    @Schema(description = "密码")
+    private String password;
     @Schema(description = "用户创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;

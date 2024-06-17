@@ -19,7 +19,7 @@ for(const [key,component] of Object.entries(ElementPlusIconsVue)){
     app.component(key,component)
 }
 //6.1配置根路径
-const BASE_URL = 'http://localhost:80';
+const BASE_URL = 'http://localhost:81';
 //window里配置的都是全局内容，可以在任意script标签内部使用
 window.BASE_URL = BASE_URL;
 //在vue实例app中也添加全局属性BASE_URL,这样template标签中也可以使用根路径了

@@ -14,8 +14,8 @@ public enum StatusCode {
 
 
     NOT_LOGIN(4000, "未登录"),
-    PASSWORD_ERROR(4002, "用户名或密码错误"),
-    USERNAME_ERROR(4003, "用户名或密码错误"),
+    PASSWORD_ERROR(4002, "邮箱或密码错误"),
+    EMAIL_ERROR(4002, "邮箱或密码错误"),
 
     OPERATION_FAILED(5001, "操作失败"),
     VALIDATE_ERROR(5002, "请求参数错误"),

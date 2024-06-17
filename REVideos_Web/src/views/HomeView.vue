@@ -151,9 +151,11 @@ export default {
     Login() {
       let data = qs.stringify(this.userLogin);
       console.log(data);
-      axios.post(BASE_URL + 'v3/user/login', data).then((response) => {
+      axios.post(BASE_URL + '/v3/user/login',data).then((response) => {
         if (response.data.code === 2000) {
-          ElMessage.success('登陆成功:)')
+
+        }else{
+          ElMessage.error(response.data.msg)
         }
       });
     }

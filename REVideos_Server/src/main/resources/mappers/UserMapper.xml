@@ -3,5 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.kaguya1210.revideos_server.user.mapper.UserMapper">
-
+    <select id="select" resultType="com.github.kaguya1210.revideos_server.user.pojo.vo.UserVo">
+        select id, username, password, create_time, update_time, email
+        from user
+        where email = #{email};
+    </select>
 </mapper>

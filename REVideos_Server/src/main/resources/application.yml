@@ -37,4 +37,7 @@ knife4j:
 logging:
   level:
     root: error
-    re.kaguya._weibo_kaguya: debug
+    com:
+      github:
+        kaguya1210:
+          revideos_server: debug
