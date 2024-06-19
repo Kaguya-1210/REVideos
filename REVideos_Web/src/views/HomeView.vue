@@ -45,51 +45,89 @@
                         <div
                             class="login-tab-item"
                             :class="{ 'active-tab': currentTab === 'password' }"
-                            @click="currentTab = 'password'" style="font-size: 16px">
+                            @click="currentTab = 'password'" style="font-size: 16px;user-select: none">
                           密码登录
                         </div>
                         <span style="color: #ccc;font-size: 16px">&#160&#160|&#160&#160</span>
                         <div
                             class="login-tab-item"
-                            :class="{ 'active-tab': currentTab === 'sms' }"
-                            @click="currentTab = 'sms'" style="font-size: 16px;:active">
-                          短信登录
+                            :class="{ 'active-tab': currentTab === 'email' }"
+                            @click="currentTab = 'email'" style="font-size: 16px;:active;user-select: none">
+                          邮箱登录
                         </div>
                       </div>
 
 
                       <div v-if="currentTab === 'password'" style="text-align: center">
                         <!-- 密码登录表单 -->
-                          <div style="border: 1px solid #cccccc; border-radius: 6px 6px 0 0;height: 38px;width: 380px;margin-top: 20px;margin-left: 30px;user-select: none">
-                            <el-form-item label="账号">
-                              <input v-model="userLogin.email" placeholder="请输入邮箱" style="border: none;outline: none;width: 240px">
-                            </el-form-item>
-                          </div>
-                        <div style="border: 1px solid #cccccc;border-top: transparent; border-radius: 0 0 6px 6px;height: 38px;width: 380px;margin-left: 30px;user-select: none">
+                        <div
+                            style="border: 1px solid #cccccc; border-radius: 6px 6px 0 0;height: 38px;width: 380px;margin-top: 20px;margin-left: 30px;user-select: none">
+                          <el-form-item label="账号">
+                            <input v-model="userLogin.email" placeholder="请输入邮箱"
+                                   style="border: none;outline: none;width: 240px">
+                          </el-form-item>
+                        </div>
+                        <div
+                            style="border: 1px solid #cccccc;border-top: transparent; border-radius: 0 0 6px 6px;height: 38px;width: 380px;margin-left: 30px;user-select: none">
                           <el-form-item label="密码">
-                            <input v-model="userLogin.password" type="password" placeholder="请输入密码" style="border: none;outline: none;width: 240px">
+                            <input v-model="userLogin.password" type="password" placeholder="请输入密码"
+                                   style="border: none;outline: none;width: 240px">
                             <div style="color:#409EFF;">忘记密码?</div>
                           </el-form-item>
                         </div>
-<!--                        注册按钮-->
+                        <!--                        注册按钮-->
                         <div style="position: absolute;bottom: 49px;right: 221px">
-                          <el-button type="default" style="width: 180px;height: 36px;font-size: 13px;color: black">注册</el-button>
+                          <el-button @click="currentTab='email'" type="default"
+                                     style="width: 180px;height: 36px;font-size: 13px;color: black">注册
+                          </el-button>
                         </div>
-<!--                        登录按钮-->
+                        <!--                        登录按钮-->
                         <div style="position: absolute;bottom: 49px;right: 20px">
-                          <el-button @click="Login()" color="#00ADEAFF" type="primary" style="width: 180px;height: 36px;font-size: 13px;color: #ffffff">登录</el-button>
+                          <el-button @click="Login()" color="#00ADEAFF" type="primary"
+                                     style="width: 180px;height: 36px;font-size: 13px;color: #ffffff">登录
+                          </el-button>
                         </div>
                       </div>
 
-                      <div v-if="currentTab === 'sms'">
+                      <div v-if="currentTab === 'email'">
                         <!-- 注册账号表单 -->
-                        <el-card style="width: 380px;margin-top: 20px;margin-left: 30px">
+                        <div
+                            style="border: 1px solid #cccccc;border-radius:6px 6px 0 0 ;height: 38px;width: 380px;margin-left: 30px;margin-top:20px;user-select: none">
+                          <div class="custom-select-wrapper"
+                               style="text-align: left;margin-top: 10px;margin-left: 15px">
+                            <select style="border:none;box-shadow: none;outline: none;appearance: none;position: absolute">
+                              <option value="163.com">@163</option>
+                              <option value="qq.com">@qq</option>
+                              <option value="gmail.com">@gmail</option>
+                            </select>
+                            <img style="position: absolute;right: 330px;margin-top: 3px"
+                                 src="https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/select_arrow.ce6b4ad2.svg"
+                                 alt="喵~">
+                            <input placeholder="请输入邮箱"
+                                   style="position: absolute;margin-left:60px;border: none;outline: none;width: 190px">
 
-                        </el-card>
+                            <span style="position: absolute;right: 120px; display: inline-block; width: 1px; height: 20px; background-color: #cccccc; margin: 0 10px;"></span>
+                            <span style="font-size: 13px;position: absolute;right: 36px;color: #CCCFD2FF">获取验证码</span>
+                          </div>
+                          <div
+                              style="position: absolute; top: 80px;left: 289px; border: 1px solid #cccccc;border-top:transparent;border-radius:0 0 6px 6px;height: 38px;width: 380px;user-select: none;text-align: left">
+
+                            <span style="position: absolute;top: 8px; margin-left: 17px; ">验证码</span>
+                            <input
+                                placeholder="请输入验证码" style="position: absolute;top: 10px; margin-left: 75px;border: none;outline: none;width: 190px">
+
+                          </div>
+                          <div style="position:absolute;bottom:47px;right: 19px; text-align:center; height: 38px;width: 380px;margin-left: 30px;user-select: none">
+                            <el-button @click="Login()" color="#00ADEAFF" type="primary"
+                                       style="width: 180px;height: 36px;font-size: 13px;color: #ffffff;">登录 / 注册
+                            </el-button>
+
+                          </div>
+                        </div>
+
                       </div>
 
                     </div>
-
                   </el-col>
 
 
@@ -153,8 +191,11 @@ export default {
       console.log(data);
       axios.post(BASE_URL + '/v3/user/login',data).then((response) => {
         if (response.data.code === 2000) {
-
+          this.closeWindow();
+          this.userLogin={}
+          ElMessage.success('登陆成功');
         }else{
+          this.userLogin.password = '';
           ElMessage.error(response.data.msg)
         }
       });
@@ -192,5 +233,6 @@ export default {
   box-shadow: none !important; /* 去除阴影，如果有的话 */
   outline: none !important; /* 在获得焦点时去除轮廓 */
 }
+
 
 </style>
