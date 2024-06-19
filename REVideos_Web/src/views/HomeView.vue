@@ -221,7 +221,7 @@ export default {
 }
 
 .centered-content {
-  //background-color: aqua;
+//background-color: aqua;
 }
 
 .active-tab {
