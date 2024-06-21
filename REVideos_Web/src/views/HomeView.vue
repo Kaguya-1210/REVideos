@@ -95,19 +95,24 @@
                             style="border: 1px solid #cccccc;border-radius:6px 6px 0 0 ;height: 38px;width: 380px;margin-left: 30px;margin-top:20px;user-select: none">
                           <div class="custom-select-wrapper"
                                style="text-align: left;margin-top: 10px;margin-left: 15px">
-                            <select style="border:none;box-shadow: none;outline: none;appearance: none;position: absolute">
-                              <option value="163.com">@163</option>
-                              <option value="qq.com">@qq</option>
-                              <option value="gmail.com">@gmail</option>
-                            </select>
-                            <img style="position: absolute;right: 330px;margin-top: 3px"
-                                 src="https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/select_arrow.ce6b4ad2.svg"
-                                 alt="喵~">
-                            <input placeholder="请输入邮箱"
+                            <span style="position: absolute;">邮箱</span>
+
+                            <input v-model="regEmail" @input="verifyMail" placeholder="请输入邮箱"
                                    style="position: absolute;margin-left:60px;border: none;outline: none;width: 190px">
 
                             <span style="position: absolute;right: 120px; display: inline-block; width: 1px; height: 20px; background-color: #cccccc; margin: 0 10px;"></span>
-                            <span style="font-size: 13px;position: absolute;right: 36px;color: #CCCFD2FF">获取验证码</span>
+
+                            <el-button
+                                type="primary"
+                                :disabled="!isCode"
+                                style="font-size: 13px; position: absolute; top: 46px; border: none; background-color: transparent; right: 68px;width: 15px;"
+                                :style="{ color: isCode ? '#409EFF' : '#CCCFD2FF' }"
+                                @click="handleClick"
+                            >
+                              {{ buttonText }}
+                            </el-button>
+<!--                            <el-button type="primary" v-else  style="font-size: 13px;position: absolute;top: 46px; border: none;background-color:transparent;right: 36px;color: #CCCFD2FF">获取验证码</el-button>&ndash;&gt;-->
+
                           </div>
                           <div
                               style="position: absolute; top: 80px;left: 289px; border: 1px solid #cccccc;border-top:transparent;border-radius:0 0 6px 6px;height: 38px;width: 380px;user-select: none;text-align: left">
@@ -174,31 +179,75 @@ export default {
   components: {CloseBold},
   data() {
     return {
+      //窗口
       dialogVisible: false,
+      //标签切换
       currentTab: 'password',
-      userLogin:{
+      //检测验证码
+      isCode: false,
+      buttonText: '获取验证码',
+      timer: null,
+      count: 3, // 60秒计时器
+      regEmail: '',
+      Code: '',
+      //登录数据
+      userLogin: {
         'email': '',
         'password': ''
       }
-    }
+    };
   },
   methods: {
-    closeWindow(){
+    closeWindow() {
       this.dialogVisible = false;
+    },
+    handleClick() {
+      if (this.isCode) {
+        this.isCode = false;
+        this.buttonText = `重新获取(${this.count}s)`;
+        this.timer = setInterval(() => {
+          if (this.count > 0) {
+            this.count--;
+            this.buttonText = `重新获取(${this.count}s)`;
+          } else {
+            this.resetTimer();
+          }
+        }, 1000);
+      }
+    },
+    resetTimer() {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.count = 3;
+      this.buttonText = '获取验证码';
+      this.isCode = true;
     },
     Login() {
       let data = qs.stringify(this.userLogin);
       console.log(data);
-      axios.post(BASE_URL + '/v3/user/login',data).then((response) => {
+      axios.post(BASE_URL + '/v3/user/login', data).then((response) => {
         if (response.data.code === 2000) {
           this.closeWindow();
-          this.userLogin={}
+          this.userLogin = {}
           ElMessage.success('登陆成功');
-        }else{
+        } else {
           this.userLogin.password = '';
           ElMessage.error(response.data.msg)
         }
       });
+    },
+    //校检邮箱
+    verifyMail() {
+
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      //ElMessage.info(regex.test(this.regEmail));
+      console.log(regex.test(this.regEmail));
+      this.isCode=regex.test(this.regEmail);
+    },
+    beforeDestroy() {
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
     }
   }
 }
