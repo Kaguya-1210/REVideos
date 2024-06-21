@@ -58,8 +58,10 @@
                       </div>
 
 
-                      <div v-if="currentTab === 'password'" style="text-align: center">
+                      <div v-if="currentTab === 'password'">
+
                         <!-- 密码登录表单 -->
+
                         <div
                             style="border: 1px solid #cccccc; border-radius: 6px 6px 0 0;height: 38px;width: 380px;margin-top: 20px;margin-left: 30px;user-select: none">
                           <el-form-item label="账号">
@@ -111,7 +113,7 @@
                             >
                               {{ buttonText }}
                             </el-button>
-<!--                            <el-button type="primary" v-else  style="font-size: 13px;position: absolute;top: 46px; border: none;background-color:transparent;right: 36px;color: #CCCFD2FF">获取验证码</el-button>&ndash;&gt;-->
+                            <!--                            <el-button type="primary" v-else  style="font-size: 13px;position: absolute;top: 46px; border: none;background-color:transparent;right: 36px;color: #CCCFD2FF">获取验证码</el-button>&ndash;&gt;-->
 
                           </div>
                           <div
@@ -221,6 +223,14 @@ export default {
       this.count = 3;
       this.buttonText = '获取验证码';
       this.isCode = true;
+      let data = qs.stringify(this.regEmail);
+      axios.post(BASE_URL + 'v3/user/reg', data).then((response) => {
+        if (response.data.code === 2000) {
+          ElMessage.success('验证码获取成功');
+        } else {
+          ElMessage.error(response.data.msg);
+        }
+      });
     },
     Login() {
       let data = qs.stringify(this.userLogin);
