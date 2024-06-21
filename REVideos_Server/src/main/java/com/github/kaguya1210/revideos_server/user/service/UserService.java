@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
     UserVo login(UserLoginParam userLoginParam);
+
+    UserVo reg(UserLoginParam userRegParam);
 }

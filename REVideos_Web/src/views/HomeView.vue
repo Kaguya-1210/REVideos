@@ -204,6 +204,8 @@ export default {
       this.dialogVisible = false;
     },
     handleClick() {
+      console.log(this.regEmail);
+      this.reg();
       if (this.isCode) {
         this.isCode = false;
         this.buttonText = `重新获取(${this.count}s)`;
@@ -223,8 +225,10 @@ export default {
       this.count = 3;
       this.buttonText = '获取验证码';
       this.isCode = true;
-      let data = qs.stringify(this.regEmail);
-      axios.post(BASE_URL + 'v3/user/reg', data).then((response) => {
+    },
+    reg() {
+      console.log(this.regEmail);
+      axios.post(BASE_URL + '/v3/user/reg/'+this.regEmail).then((response) => {
         if (response.data.code === 2000) {
           ElMessage.success('验证码获取成功');
         } else {

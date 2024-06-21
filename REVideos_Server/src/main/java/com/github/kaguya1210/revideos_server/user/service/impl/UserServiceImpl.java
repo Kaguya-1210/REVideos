@@ -17,6 +17,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
+    @Override
+    public UserVo reg(UserLoginParam userRegParam) {
+        return null;
+    }
+
     @Override
     public UserVo login(UserLoginParam userLoginParam) {
         UserVo data = userMapper.select(userLoginParam.getEmail());
