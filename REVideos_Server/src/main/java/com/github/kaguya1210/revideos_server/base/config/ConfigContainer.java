@@ -10,8 +10,8 @@ public class ConfigContainer {
 
     public static class Server{
         @Value("${server.address}")
-        public String address = "127.0.0.1";
+        public String address = "localhost";
         @Value("${server.port}")
-        public int port = 11451;
+        public int port = 81;
     }
 }
