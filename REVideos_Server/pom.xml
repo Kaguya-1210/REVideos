@@ -70,6 +70,8 @@
     </dependencies>
 
     <build>
+        <finalName>REVideo</finalName>
+        <directory>.build</directory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -81,6 +83,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <mainClass>com.github.kaguya1210.revideos_server.ReVideosServerApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
