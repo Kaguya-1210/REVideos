@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ReVideosServerApplicationTests {
 
     @Test
-    void contextLoads() {
+    void Test() {
+
     }
 
 }
